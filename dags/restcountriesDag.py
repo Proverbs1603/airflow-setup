@@ -60,7 +60,7 @@ CREATE TABLE {schema}.{table} (
             print(name, "-", population, "-", area)
             sql = f"INSERT INTO {schema}.{table} VALUES ('{name}', '{population}', '{area}')"
             cur.execute(sql)
-        cur.execute("COMMIT;")   # cur.execute("END;")
+        cur.execute("COMMIT;")
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
         cur.execute("ROLLBACK;")
@@ -69,8 +69,8 @@ CREATE TABLE {schema}.{table} (
 
 with DAG(
     dag_id='restcountriesDag',
-    start_date=datetime(2022, 10, 6),  # 날짜가 미래인 경우 실행이 안됨
-    schedule='0 1 * * *',  # 적당히 조절
+    start_date=datetime(2024, 11, 14),
+    schedule='30 6 * * 6',  # 매주 토요일 오전6시 30분 (UTC 기준)
     max_active_runs=1,
     catchup=False,
     default_args={
@@ -81,7 +81,7 @@ with DAG(
 ) as dag:
 
     url = "https://restcountries.com/v3/all"
-    schema = 'tlsdnd1667'   ## 자신의 스키마로 변경
+    schema = 'tlsdnd1667'
     table = 'country'
 
     countries_info = transform(extract(url))
