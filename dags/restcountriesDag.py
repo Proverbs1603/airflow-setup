@@ -58,8 +58,9 @@ CREATE TABLE {schema}.{table} (
             population = r["population"]
             area = r["area"]
             print(name, "-", population, "-", area)
-            sql = f"INSERT INTO {schema}.{table} VALUES ('{name}', '{population}', '{area}')"
-            cur.execute(sql)
+            # 파라미터 바인딩을 사용한 SQL 쿼리
+            sql = f"INSERT INTO {schema}.{table} (name, population, area) VALUES (%s, %s, %s)"
+            cur.execute(sql, (name, population, area))  # 파라미터로 값 전달
         cur.execute("COMMIT;")
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
