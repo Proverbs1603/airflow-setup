@@ -8,7 +8,7 @@ from datetime import timedelta
 
 import requests
 import logging
-
+import psycopg2
 
 def get_Redshift_connection(autocommit=True):
     hook = PostgresHook(postgres_conn_id='redshift_dev_db')
