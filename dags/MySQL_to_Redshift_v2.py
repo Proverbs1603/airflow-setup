@@ -12,6 +12,18 @@ import logging
 import psycopg2
 import json
 
+'''
+Incremental update는 execution_date (almost same with 읽어와야하는 데이터 일자)
+을 주면서 실행시키는데 만약 7월 한달간 데이터를 가져와야한다면 실행을 어떻게 해야하는가?
+-> airflow dags backfill dag_id -s 2024-07-01 -e 2024-08-01
+
+-- Preparing Option --
+start_date부터 시작하지만 end_date은 포함하지 않음.
+catchUp = Ture
+execution_date을 사용해서 Incremental update가 구현되어 있어야함.
+default_args의 'depends_on_past'를 True로 설정시 실행순서를 날짜순으로 할 수 있음. 
+데이터 소스 자체가 특정 일자를 기준으로 조회할 수 있어야함.
+'''
 dag = DAG(
     dag_id = 'MySQL_to_Redshift_v2',
     start_date = datetime(2023,1,1), # 날짜가 미래인 경우 실행이 안됨
@@ -21,6 +33,7 @@ dag = DAG(
     default_args = {
         'retries': 1,
         'retry_delay': timedelta(minutes=3),
+        # 'depends_on_past': True,
     }
 )
 
@@ -29,7 +42,7 @@ table = "nps"
 s3_bucket = "grepp-data-engineering"
 s3_key = schema + "-" + table       # s3_key = schema + "/" + table
 
-# airflow의 execution_date를 활용하여
+# airflow의 execution_date를 활용하여 
 sql = "SELECT * FROM prod.nps WHERE DATE(created_at) = DATE('{{ execution_date }}')"
 print(sql)
 mysql_to_s3_nps = SqlToS3Operator(
