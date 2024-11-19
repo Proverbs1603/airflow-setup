@@ -1,6 +1,6 @@
 {
           'table': 'nps_summary',
-          'schema': 'keeyong',
+          'schema': 'tlsdnd1667',
           'main_sql': """
 SELECT LEFT(created_at, 10) AS date,
   ROUND(SUM(CASE
