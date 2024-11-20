@@ -108,8 +108,8 @@ load = PythonOperator(
     task_id = 'load',
     python_callable = load,
     params = {
-        'schema': 'tlsdnd1667',   ## 자신의 스키마로 변경
-        'table': 'name_gender_fail'  ##의도로 실패 (슬렉 메시지 테스트)
+        'schema': 'tlsdnd1667_fail',   ## 자신의 스키마로 변경, 의도로 실패 (슬렉 메시지 테스트)
+        'table': 'name_gender'  
     },
     dag = dag)
 
