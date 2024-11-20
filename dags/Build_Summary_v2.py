@@ -19,7 +19,7 @@ dag = DAG(
     catchup=False,
     start_date=datetime(2021, 9, 17),
     default_args= {
-        'on_failure_callback': slack.on_failure_callback,
+        #'on_failure_callback': slack.on_failure_callback,
         'retries': 1,
         'retry_delay': timedelta(minutes=1),
     }
@@ -27,9 +27,7 @@ dag = DAG(
 
 # this should be listed in dependency order (all in analytics)
 tables_load = [
-    'nps_summary',
-    'mau_summary',
-    'channel_summary'
+    'mau_summary'
 ]
 
 dag_root_path = os.path.dirname(os.path.abspath(__file__))
