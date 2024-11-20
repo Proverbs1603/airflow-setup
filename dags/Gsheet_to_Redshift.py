@@ -85,10 +85,11 @@ dag = DAG(
         'retry_delay': timedelta(minutes=3),
     }
 )
-
+#(keeyong's)   "url": "https://docs.google.com/spreadsheets/d/1hW-_16OqgctX-_lXBa0VSmQAs98uUnmfOqvDYYjuE50/",
+#(dvewoong's)  "url": "https://docs.google.com/spreadsheets/d/1hreuMvldFg6V6iS5-FNgGGAyY3HKIIAd-3gZuAnIscc/",
 sheets = [
     {
-        "url": "https://docs.google.com/spreadsheets/d/1hW-_16OqgctX-_lXBa0VSmQAs98uUnmfOqvDYYjuE50/",
+        "url": "https://docs.google.com/spreadsheets/d/1hreuMvldFg6V6iS5-FNgGGAyY3HKIIAd-3gZuAnIscc/",
         "tab": "SheetToRedshift",
         "schema": "tlsdnd1667",
         "table": "spreadsheet_copy_testing"
