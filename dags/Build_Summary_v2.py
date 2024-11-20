@@ -19,7 +19,7 @@ dag = DAG(
     catchup=False,
     start_date=datetime(2021, 9, 17),
     default_args= {
-        #'on_failure_callback': slack.on_failure_callback,
+        'on_failure_callback': slack.on_failure_callback,
         'retries': 1,
         'retry_delay': timedelta(minutes=1),
     }

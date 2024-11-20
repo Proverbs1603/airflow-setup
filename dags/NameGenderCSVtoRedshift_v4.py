@@ -5,7 +5,7 @@ from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 from datetime import datetime
 from datetime import timedelta
-# from plugins import slack
+from plugins import slack
 
 import requests
 import logging
@@ -84,7 +84,7 @@ dag = DAG(
     default_args = {
         'retries': 1,
         'retry_delay': timedelta(minutes=3),
-        # 'on_failure_callback': slack.on_failure_callback,
+        'on_failure_callback': slack.on_failure_callback,
     }
 )
 
