@@ -24,7 +24,7 @@ def etl(schema, table):
     lon = 126.9780
 
     # https://openweathermap.org/api/one-call-api
-    url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}&units=metric&exclude=current,minutely,hourly,alerts"
+    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid={api_key}&units=metric&exclude=current,minutely,hourly,alerts"
     response = requests.get(url)
     data = json.loads(response.text)
     """
