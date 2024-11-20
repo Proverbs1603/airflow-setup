@@ -26,7 +26,7 @@ with DAG(
         python_callable=update_gsheet,
         params = {
             "sql": "SELECT * FROM analytics.nps_summary",
-            "sheetfilename": "spreadsheet-copy-testing",
+            "sheetfilename": "gspread-copy-testing",
             "sheetgid": "RedshiftToSheet"
         }
     )
