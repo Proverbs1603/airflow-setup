@@ -4,13 +4,14 @@ from airflow.operators.python import BranchPythonOperator
 from datetime import datetime
 
 default_args = {
-    'start_date': datetime(2023, 1, 1)
+    'start_date': datetime(2024, 1, 1)
 }
 
 dag = DAG(
     'Learn_BranchPythonOperator',
     schedule='@daily',
-    default_args=default_args)
+    default_args=default_args,
+    catchup=False)
 
 
 def decide_branch(**context):
